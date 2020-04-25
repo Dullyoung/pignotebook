@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    android:gravity="center"
+    tools:context=".LoginActivity">
+    <TextView
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/login_title"
+        android:textColor="@color/black_overlay"></TextView>
+    <EditText
+        android:id="@+id/ed"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:textColor="@color/black_overlay"
+        android:hint="这里输密码"
+        android:imeOptions="actionDone"
+        android:inputType="textPassword"
+        android:textColorHint="@color/black_overlay"
+        android:theme="@style/MyEditText"
+        android:layout_height="wrap_content"
+        ></EditText>
+    <TextView
+        android:padding="10sp"
+        android:layout_width="wrap_content"
+        android:text="使用猪蹄"
+        android:id="@+id/use_finger"
+
+        android:textColor="@color/black_overlay"
+        android:layout_height="wrap_content">
+
+    </TextView>
+</LinearLayout>

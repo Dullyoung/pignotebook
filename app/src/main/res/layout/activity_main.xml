@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical"
+    android:paddingTop="30sp"
+    android:paddingRight="10sp"
+    android:paddingLeft="10sp"
+    android:paddingBottom="10sp"
+    tools:context=".MainActivity">
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <!--                标题-->
+                <RelativeLayout
+                    android:id="@+id/content_root_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="20sp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="20sp"
+                    android:paddingBottom="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerInParent="true"
+                        android:text="@string/app_name"
+                        android:textColor="#000000"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/pswm"
+                        android:id="@+id/psw_manager"
+                        android:layout_centerInParent="true"
+                        android:layout_marginRight="20sp"
+                        android:layout_toLeftOf="@+id/notification"></ImageView>
+                    <ImageView
+                        android:id="@+id/notification"
+                        android:layout_centerInParent="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/manager"
+                        android:layout_marginRight="20sp"
+                        android:background="?android:selectableItemBackgroundBorderless"
+                        android:layout_toLeftOf="@+id/create"
+                        ></ImageView>
+                    <ImageView
+                        android:id="@+id/create"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:background="?android:selectableItemBackgroundBorderless"
+                        android:src="@mipmap/create"></ImageView>
+                </RelativeLayout>
+
+                <!--正文RV展示-->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/content_root_layout"
+                    android:overScrollMode="never"></androidx.recyclerview.widget.RecyclerView>
+                <!-- 无数据文字提示显示-->
+                <TextView
+                    android:id="@+id/no_data_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/no_data"
+                    android:textSize="20sp"
+                    android:visibility="gone"></TextView>
+
+            </RelativeLayout>
+
+
+            <!--        长按出现的工具栏-->
+            <RelativeLayout
+                android:id="@+id/tool_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                >
+                <!--            全选和取消按钮-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/item_bg_0">
+
+                    <TextView
+                        android:id="@+id/cancel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerInParent="true"
+                        android:background="?android:selectableItemBackgroundBorderless"
+                        android:padding="5sp"
+                        android:text="取消"
+                        android:textSize="20sp"></TextView>
+
+                    <TextView
+                        android:id="@+id/check_cancel_all"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        android:background="?android:selectableItemBackgroundBorderless"
+                        android:padding="5sp"
+                        android:text="全选"
+                        android:textSize="20sp"></TextView>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/white_bg"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:text="置顶"
+                        android:background="?android:selectableItemBackgroundBorderless"
+                        android:onClick="putToTop"></TextView>
+                    <TextView
+                        android:text="删除"
+                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:onClick="delete"
+                        android:background="?android:selectableItemBackgroundBorderless"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"></TextView>
+                </LinearLayout>
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</LinearLayout>

@@ -1,0 +1,38 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+<!--        导航栏颜色 例如新建项目不是全屏 现实的application的那个绿色-->
+        <item name="colorPrimary">#00000000</item>
+        <!--        通知栏颜色-->
+        <item name="colorPrimaryDark">#00000000</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorControlNormal">#f45a65</item>
+        <item name="colorControlActivated">#f45a65</item>
+    </style>
+
+
+    <style name="CheckBoxTheme">
+        <item name="colorAccent">#63B8FF</item><!--选中颜色-->
+        <item name="android:colorControlActivated">#63B8FF</item>
+        <item name="colorControlNormal">#63B8FF</item><!--未选中颜色-->
+    </style>
+    <style name="MyEditText" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlActivated">#63B8FF</item>
+    </style>
+    <style name="MySwitch">
+        <item name="android:colorControlActivated">#00CC99</item>
+        <item name="android:colorControlNormal">#ffffff</item>
+    </style>
+    <style name="no_border_dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item><!-- 边框 -->
+        <item name="android:windowIsFloating">true</item><!-- 是否浮现在activity之上 -->
+        <item name="android:windowIsTranslucent">false</item><!-- 半透明 -->
+        <item name="android:windowNoTitle">true</item>  <!-- 无标题 -->
+        <item name="android:windowBackground">@android:color/transparent</item><!-- 背景图片 -->
+        <item name="android:backgroundDimEnabled">true</item><!--背景是否需要模糊-->
+    </style>
+</resources>

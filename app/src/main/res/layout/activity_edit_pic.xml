@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context=".EditPicActivity">
+    <ImageView
+        android:layout_width="match_parent"
+        android:id="@+id/background_preview"
+        android:layout_height="match_parent"></ImageView>
+    <RelativeLayout
+        android:paddingTop="30sp"
+        android:paddingLeft="10sp"
+        android:paddingRight="10sp"
+        android:paddingBottom="10sp"
+        android:layout_width="match_parent"
+        android:id="@+id/title_layout"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/back"
+            android:background="?android:selectableItemBackgroundBorderless"
+            android:src="@mipmap/back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="编辑背景图"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/finish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="完成"
+            android:background="?android:selectableItemBackgroundBorderless"
+            android:textColor="@color/default_color"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:padding="10sp"
+        android:id="@+id/line1"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="透明度"
+            ></TextView>
+
+        <SeekBar
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/alpha_seekbar"
+            android:progressBackgroundTint="@color/black_overlay"
+            android:thumb="@drawable/seekbar_thumb"></SeekBar>
+
+    </LinearLayout>
+    <LinearLayout
+
+        android:padding="10sp"
+        android:layout_above="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="模糊度"
+            ></TextView>
+
+        <SeekBar
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/fuzzy_seekbar"
+            android:progressBackgroundTint="@color/black_overlay"
+            android:thumb="@drawable/seekbar_thumb" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

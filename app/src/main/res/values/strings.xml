@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">小猪记事本</string>
+    <string name="no_data">猪圈里还没有小猪哼哼</string>
+    <string name="title_create">召唤小猪记事</string>
+    <string name="ed_hint">猪脑子要记点啥？</string>
+    <string name="change_title">篡改小猪的记忆</string>
+    <string name="login_title">验证猪蹄或者密码</string>
+    <string name="sys_setting">系统设置</string>
+    <string name="psw_start">密码启动</string>
+    <string name="input_psw">输入密码：</string>
+    <string name="input_psw_again">再次输入密码</string>
+    <string name="change_psw">确认修改</string>
+    <string name="normal_tip">一般</string>
+    <string name="imp_tip">重要</string>
+</resources>
