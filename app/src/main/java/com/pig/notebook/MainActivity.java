@@ -93,8 +93,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        init();
         ImageView i = new ImageView(this);
-
         if (new File(dir, fileName).exists()) {
             //如果自定义图片没有添加过且图片发生了改变
             SharedPreferences sp = getSharedPreferences("NoteData", MODE_PRIVATE);
