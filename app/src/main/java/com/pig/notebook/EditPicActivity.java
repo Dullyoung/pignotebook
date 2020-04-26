@@ -32,6 +32,9 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import static android.view.View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
+import static android.view.View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+
 public class EditPicActivity extends AppCompatActivity {
     SeekBar fuzzy, alpha;
     ImageView bg;
@@ -42,17 +45,17 @@ public class EditPicActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().getDecorView().setSystemUiVisibility(SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         setContentView(R.layout.activity_edit_pic);
         fuzzy = findViewById(R.id.fuzzy_seekbar);
         alpha = findViewById(R.id.alpha_seekbar);
-
         bg = findViewById(R.id.background_preview);
         dir = Environment.getExternalStorageDirectory() + getCacheDir().getAbsolutePath() + "/background/";
         try {
             bg.setImageBitmap( BitmapFactory.decodeStream(new FileInputStream(dir+fileName)));
         } catch (FileNotFoundException e) {
-            Toast.makeText(this, "读取文件失败", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "读取文件失败"+dir, Toast.LENGTH_SHORT).show();
+
             e.printStackTrace();
         }
         findViewById(R.id.finish).setOnClickListener(new View.OnClickListener() {

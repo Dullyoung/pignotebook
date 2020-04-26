@@ -95,8 +95,9 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         init();
         ImageView i = new ImageView(this);
+        //判断背景图片路径文件是否存在 不存在就用默认就好了
         if (new File(dir, fileName).exists()) {
-            //如果自定义图片没有添加过且图片发生了改变
+
             SharedPreferences sp = getSharedPreferences("NoteData", MODE_PRIVATE);
             int alpha = sp.getInt("alpha", -1);
             boolean added=sp.getBoolean("added",false);
@@ -112,8 +113,9 @@ public class MainActivity extends AppCompatActivity {
                     editor.putBoolean("added",false);
                     editor.commit();
                 }
+                //没有添加过就用默认背景
                 view.setBackgroundResource(R.color.default_background_color);
-                Log.i(TAG, "onResume: tianjiaguo 恢复默认");
+                Log.i(TAG, "onResume:  恢复默认");
                 return;
             }
             // 1 已经添加过 图片没有改变 -》不做任何操作
