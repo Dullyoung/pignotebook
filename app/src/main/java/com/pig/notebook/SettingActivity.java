@@ -74,7 +74,6 @@ public class SettingActivity extends BaseActivity {
                SharedPreferences.Editor editor=sp.edit();
                editor.putInt("alpha",-1);
                editor.commit();
-                Toast.makeText(SettingActivity.this, "主页背景重启生效", Toast.LENGTH_SHORT).show();
                finish();
             }
         });

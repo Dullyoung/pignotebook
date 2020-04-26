@@ -55,13 +55,13 @@ public class BaseActivity extends AppCompatActivity {
                 Drawable drawable=Drawable.createFromPath(dir+fileName);
                 i.setImageDrawable(drawable);
                 i.setImageAlpha(alpha);
-                //判断这个图片是不是添加过了
                 ((ViewGroup) view).addView(i,0,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
                 return;
             }
         }
-        view.setBackgroundColor(getColor(R.color.default_background_color));
+        view.setBackgroundColor(getResources().getColor(R.color.default_background_color));
         ((ViewGroup) view).removeView(i);
+
     }
 
     @Override

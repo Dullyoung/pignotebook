@@ -9,6 +9,7 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -85,7 +86,9 @@ public class NotificationManagerActivity extends BaseActivity {
 
 
     private void setData() {
-        notifications = manager.getActiveNotifications();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            notifications = manager.getActiveNotifications();
+        }
 
         if (notifications.length == 0) {
             recyclerView.setVisibility(View.GONE);

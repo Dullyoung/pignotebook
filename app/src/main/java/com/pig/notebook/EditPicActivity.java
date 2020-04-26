@@ -42,7 +42,7 @@ public class EditPicActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
          View view = getWindow().getDecorView();
-        view.setPadding(30, 90, 30, 30);
+
         setContentView(R.layout.activity_edit_pic);
         fuzzy = findViewById(R.id.fuzzy_seekbar);
         alpha = findViewById(R.id.alpha_seekbar);
@@ -62,8 +62,9 @@ public class EditPicActivity extends AppCompatActivity {
                 SharedPreferences sharedPreferences=getSharedPreferences("NoteData",MODE_PRIVATE);
                 SharedPreferences.Editor editor=sharedPreferences.edit();
                 editor.putInt("alpha", (100-alpha.getProgress())*255/100);
+//                editor.putBoolean("added",false);
+                editor.putBoolean("changed",true);
                 editor.commit();
-
                 finish();
             }
         });

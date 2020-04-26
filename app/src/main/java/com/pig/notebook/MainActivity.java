@@ -9,9 +9,11 @@ import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +51,8 @@ public class MainActivity extends AppCompatActivity {
     TextView cancel, checkAll;
     ShowAdapter showAdapter = new ShowAdapter();
     View view;
-    public static boolean added=false;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +64,23 @@ public class MainActivity extends AppCompatActivity {
         findView();
         refresh();
         init();
+        if (new File(dir, fileName).exists()) {
+            ImageView i=new ImageView(this);
+            Drawable drawable = Drawable.createFromPath(dir + fileName);
+            i.setImageDrawable(drawable);
+            SharedPreferences sp = getSharedPreferences("NoteData", MODE_PRIVATE);
+            SharedPreferences.Editor editor=sp.edit();
+            int alpha = sp.getInt("alpha", -1);
+            if (alpha!=-1){
+                i.setImageAlpha(alpha);
+                ((ViewGroup) view).addView(i,0);
+                editor.putBoolean("added",true);
+                editor.commit();
+            }
+            view.setBackgroundResource(R.color.default_background_color);
+        }
+
+
     }
 
     @Override
@@ -73,23 +93,56 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        ImageView i = new ImageView(this);
 
-        ImageView i=new ImageView(this);
-        if (new File(dir,fileName).exists()){
-            SharedPreferences sp=getSharedPreferences("NoteData",MODE_PRIVATE);
-            int alpha= sp.getInt("alpha",-1);
-            if (alpha!=-1){
-
-                Drawable drawable = Drawable.createFromPath(dir + fileName);
-                i.setImageDrawable(drawable);
-                i.setImageAlpha(alpha);
-                //判断这个图片是不是添加过了
-
-                ((ViewGroup) view).addView(i,0,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        if (new File(dir, fileName).exists()) {
+            //如果自定义图片没有添加过且图片发生了改变
+            SharedPreferences sp = getSharedPreferences("NoteData", MODE_PRIVATE);
+            int alpha = sp.getInt("alpha", -1);
+            boolean added=sp.getBoolean("added",false);
+            boolean changed=sp.getBoolean("changed",false);
+            SharedPreferences.Editor editor=sp.edit();
+            //恢复默认
+            if (alpha==-1){
+                if (added){
+                    //添加过就移除image
+                    ((ViewGroup) view).removeViewAt(0);
+                    Log.i(TAG, "onResume: 移除image 设置默认背景");
+                    view.setBackgroundResource(R.color.default_background_color);
+                    editor.putBoolean("added",false);
+                    editor.commit();
+                }
+                view.setBackgroundResource(R.color.default_background_color);
+                Log.i(TAG, "onResume: tianjiaguo 恢复默认");
                 return;
-            } view.setBackgroundColor(getColor(R.color.default_background_color));
-            ((ViewGroup) view).removeView(i);
+            }
+            // 1 已经添加过 图片没有改变 -》不做任何操作
+            if (added&&!changed){
+                Log.i(TAG, "onResume: +已经添加过");
+                return;
+            }
+            // 2 添加过  但是自定义图片改变了
+            // 不需要再添加 只需要改变Image的drawable
+            if (added&&changed){
+                editor.putBoolean("changed",false);
+                editor.commit();
+                ImageView imageView= ((ImageView)  ((ViewGroup) view).getChildAt(0));
+                imageView.setImageAlpha(alpha);
+                imageView.setImageDrawable(Drawable.createFromPath(dir+fileName));
+                Log.i(TAG, "onResume: 添加过 图片改变了 "+((ViewGroup) view).getChildAt(0));
+                return;
+            }
+            // 没添加过 添加图片到最底层
+            Drawable drawable = Drawable.createFromPath(dir + fileName);
+            i.setImageDrawable(drawable);
+            i.setImageAlpha(alpha);
+            ((ViewGroup) view).addView(i,0);
+            editor.putBoolean("added",true);
+            Log.i(TAG, "onResume: 没添加过");
+            editor.commit();
+            return;
         }
+
 
     }
 
@@ -106,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.notification).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               goToNotification();
+                goToNotification();
             }
         });
         findViewById(R.id.psw_manager).setOnClickListener(new View.OnClickListener() {
@@ -334,15 +387,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-   private void goToNotification(){
-       NotificationManager manager= (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-       if (manager.areNotificationsEnabled()){
-           startActivity(new Intent(MainActivity.this, NotificationManagerActivity.class));
-       }else {
-                   openNotificationSettingsForApp();
-       }
-   }
-
+    private void goToNotification() {
+        NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            if (manager.areNotificationsEnabled()) {
+                startActivity(new Intent(MainActivity.this, NotificationManagerActivity.class));
+            } else {
+                openNotificationSettingsForApp();
+            }
+        } else {
+            startActivity(new Intent(MainActivity.this, NotificationManagerActivity.class));
+        }
+    }
 
 
     private void openNotificationSettingsForApp() {
